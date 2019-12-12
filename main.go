@@ -31,11 +31,11 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	b := balance.New(eth);
 
 	cmd := args[0]
 	switch cmd {
 	case "exampleBalances":
-		b := balance.New(eth, 5)
 		block := fmt.Sprintf("0x%x", 7000000)
 		requests := []*balance.Request{
 			&balance.Request{

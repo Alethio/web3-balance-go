@@ -9,10 +9,19 @@ import (
 )
 
 // New returns a new Bookkeeper struct
-func New(eth ethrpc.ETHInterface, retries uint) *Bookkeeper {
+func New(eth ethrpc.ETHInterface, opts ...Option) *Bookkeeper {
+	config := &Config{
+		Retry: false,
+		Attempts: 0,
+	}
+
+	for _, opt := range opts {
+		opt(config)
+	}
+
 	return &Bookkeeper{
 		eth:     eth,
-		retries: retries,
+		config: config,
 	}
 }
 
@@ -167,7 +176,7 @@ func (b *Bookkeeper) fetchRequests(requests []*Request, results chan *RawRespons
 		}
 
 		tries++
-		if tries >= b.retries {
+		if b.config.Retry == false || tries > b.config.Attempts {
 			done <- CollectError{reqErrors}
 			return
 		}

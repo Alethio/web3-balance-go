@@ -9,7 +9,7 @@ import (
 // Bookkeeper wraps the operations
 type Bookkeeper struct {
 	eth     ethrpc.ETHInterface
-	retries uint
+	config  *Config
 }
 
 // BlockNumber : wrapper type for a block number
