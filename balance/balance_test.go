@@ -17,7 +17,7 @@ type MockETH struct {
 }
 
 func blockNumber(bn uint64) string {
-
+	return fmt.Sprintf("0x%x", bn);
 }
 
 func (m *MockETH) GetRawBalanceAtBlock(address, block string) (string, error) {
