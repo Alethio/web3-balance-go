@@ -41,7 +41,7 @@ func ExampleBookkeeper_GetIntBalanceResults() {
 		return
 	}
 
-	b := New(r, 10)
+	b := New(r)
 	results, err := b.GetIntResults(balanceRequests())
 
 	if err != nil {
@@ -71,7 +71,7 @@ func TestGetBalancesWithOneAddressAndNoTokens(t *testing.T) {
 		},
 	}
 
-	bookkeeper := New(mockEth, 10)
+	bookkeeper := New(mockEth)
 	requests := []*Request{
 		{
 			Address:    "0x9fc201b6bc40cccbd5b588532ce98b845f95af51",
@@ -105,7 +105,7 @@ func TestGetBalancesWithOneAddressAndTokens(t *testing.T) {
 		},
 	}
 
-	bookkeeper := New(mockEth, 10)
+	bookkeeper := New(mockEth)
 	requests := []*Request{
 		&Request{
 			Address: "0x9fc201b6bc40cccbd5b588532ce98b845f95af51",
@@ -148,7 +148,7 @@ func TestGetBalancesWithMultipleAddressesAndTokens(t *testing.T) {
 		},
 	}
 
-	bookkeeper := New(mockEth, 10)
+	bookkeeper := New(mockEth)
 	requests := make([]*Request, 0, 0)
 	for _, address := range []Address{"0x9fc201b6bc40cccbd5b588532ce98b845f95af51", "0x9fc201b6bc40cccbd5b588532ce98b845f95af52"} {
 		for _, Currency := range []Currency{ETH, "0xabc", "0xabd"} {
@@ -172,7 +172,7 @@ func TestGetBalancesWithMultipleAddressesAndTokens(t *testing.T) {
 
 func TestGetBalancesWithError(t *testing.T) {
 	mockEth := &MockETH{throwError: true}
-	bookkeeper := New(mockEth, 10)
+	bookkeeper := New(mockEth)
 	block := blockNumber(7500000)
 	requests := []*Request{
 		&Request{
