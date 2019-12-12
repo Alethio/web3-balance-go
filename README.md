@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/Alethio/web3-balance-go.svg?style=svg)](https://circleci.com/gh/Alethio/web3-balance-go)
+
 ### Web3 Balance
 
 An extension of [web3-go](https://github.com/Alethio/web3-go) that is used for reading token or ether balances from the chain.
