@@ -44,10 +44,12 @@ func (loader rpcLoader) fetchRequests(b *Bookkeeper, requests []*Request, result
 		wg.Wait()
 		close(failed)
 
+		requests = make([]*Request, 0, len(requests))
 		reqErrors := make([]*RequestError, 0, len(requests))
 
 		for reqError := range failed {
 			reqErrors = append(reqErrors, reqError)
+			requests = append(requests, reqError.Request)
 		}
 
 		if len(reqErrors) == 0 {
